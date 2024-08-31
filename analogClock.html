@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock</title>
+    <style>
+       
+        .clock {
+            width: 500px;
+            height: 500px;
+            position: relative;
+            margin: 50px auto;
+            background: url('analogClock.jpg') no-repeat;
+            background-size: cover;
+        }
+
+        .clock .center {
+            width: 10px;
+            height: 10px;
+            background: #333;
+            position: absolute;
+            top: 56.25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+       
+        .hour {
+            width: 6px;
+            height: 80px; 
+            background: #333;
+            position: absolute;
+            top: 56.25%;
+            left: 50%;
+            transform-origin: bottom;
+            transform: translate(-50%, -100%) rotate(90deg);
+            z-index: 7;
+        }
+
+       
+        .minute {
+            width: 4px;
+            height: 100px; 
+            background: #666;
+            position: absolute;
+            top: 56.25%;
+            left: 50%;
+            transform-origin: bottom;
+            transform: translate(-50%, -100%) rotate(180deg);
+            z-index: 8;
+        }
+
+      
+        .second {
+            width: 2px;
+            height: 120px; 
+            background: red;
+            position: absolute;
+            top: 56.25%;
+            left: 50%;
+            transform-origin: bottom;
+            transform: translate(-50%, -100%) rotate(270deg);
+            z-index: 9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="clock">
+        <div class="center"></div>
+        <div class="hour" id="hour"></div>
+        <div class="minute" id="minute"></div>
+        <div class="second" id="second"></div>
+    </div>
+
+    <script>
+       
+        setInterval(() => {
+            const now = new Date();
+            const secondDeg = now.getSeconds() * 6;
+            const minuteDeg = now.getMinutes() * 6;
+            const hourDeg = (now.getHours() % 12) * 30 + minuteDeg / 12;
+
+            document.getElementById('hour').style.transform =` translate(-50%, -100%) rotate(${hourDeg}deg)`;
+            document.getElementById('minute').style.transform = `translate(-50%, -100%) rotate(${minuteDeg}deg)`;
+            document.getElementById('second').style.transform = `translate(-50%, -100%) rotate(${secondDeg}deg)`;
+        }, 1000);
+    </script>
+
+</body>
+</html>
